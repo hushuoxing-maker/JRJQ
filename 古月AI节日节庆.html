@@ -22,7 +22,6 @@
             position: relative;
         }
 
-        /* 水印全局定位 */
         .watermark {
             position: fixed;
             bottom: 24px;
@@ -63,7 +62,6 @@
             border-radius: 56px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.06);
             overflow: hidden;
-            transition: all 0.3s ease;
         }
 
         .header {
@@ -91,7 +89,6 @@
             background-clip: text;
             color: transparent;
             font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .header .subtitle {
@@ -102,7 +99,6 @@
             border-radius: 40px;
             border: 1px solid rgba(59, 130, 246, 0.5);
             backdrop-filter: blur(4px);
-            letter-spacing: 1px;
         }
 
         .project-desc-frame {
@@ -172,7 +168,7 @@
             margin-top: 0;
         }
 
-        .opt-btn, .color-btn {
+        .opt-btn, .color-btn, .style-btn {
             padding: 8px 16px;
             font-size: 12px;
             background: rgba(25, 24, 21, 0.7);
@@ -185,7 +181,7 @@
             font-weight: 500;
         }
 
-        .opt-btn.selected, .color-btn.selected {
+        .opt-btn.selected, .color-btn.selected, .style-btn.selected {
             background: linear-gradient(135deg, #dbb05c, #c49a42);
             color: #1a1610;
             border-color: #ffeaae;
@@ -242,7 +238,6 @@
             color: #cfc29e;
             font-size: 13px;
             margin: 12px 0 8px 6px;
-            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -267,7 +262,6 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            backdrop-filter: blur(2px);
         }
 
         .festival-check-item input {
@@ -276,7 +270,6 @@
             accent-color: #3b82f6;
             margin: 0;
             cursor: pointer;
-            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
         }
 
         .festival-check-item:hover {
@@ -336,7 +329,6 @@
             font-size: 13px;
             color: #ffe2a5;
             border: 1px solid rgba(59,130,246,0.5);
-            backdrop-filter: blur(4px);
         }
 
         .clear-elem {
@@ -421,7 +413,6 @@
             border-radius: 32px;
             padding: 20px;
             margin-bottom: 16px;
-            transition: 0.1s;
         }
 
         .prompt-number {
@@ -550,42 +541,33 @@
     <div class="main">
         <div class="input-section">
             <div class="section-title"><span>📝</span> 项目叙事</div>
-            <textarea id="projectDescInput" placeholder="例：南京万象天地·春节国潮外广场" style="width:100%; padding:12px 18px; background:rgba(20,18,15,0.9); border:1px solid rgba(59,130,246,0.6); border-radius:36px; color:#f5ecdb; font-size:14px; margin-bottom:10px;" rows="2">古月AI智能体</textarea>
+            <textarea id="projectDescInput" placeholder="例：南京万象天地·春节国潮外广场" style="width:100%; padding:12px 18px; background:rgba(20,18,15,0.9); border:1px solid rgba(59,130,246,0.6); border-radius:36px; color:#f5ecdb; font-size:14px; margin-bottom:10px;" rows="2"></textarea>
 
-            <!-- 节日主题：完全展开 + 多列网格，左侧高级蓝色框 -->
+            <!-- 新增：设计风格自动适配核心元素（单选，风格统一） -->
+            <div class="section-title"><span>🎨</span> 设计风格 · 自动适配核心元素</div>
+            <div class="btn-row" id="designStyleBtns"></div>
+
             <div class="section-title"><span>🏮</span> 万节生辉 · 全维节日库</div>
             <div id="festivalTreeContainer" class="festival-tree"></div>
 
-            <!-- 核心元素（全量库+节日联动） -->
             <div class="section-title"><span>✨</span> 万象元素 · 自由组合</div>
             <div id="coreElementPanel" class="element-picker"></div>
             <div class="selected-elem-area" id="selectedElemDisplay">✨ 当前选中元素: 无</div>
             <button id="clearElemBtn" class="clear-elem">🗑 清空所有元素</button>
 
-            <!-- 风格系列（保留） -->
+            <!-- 保留原有所有模块 -->
             <div><div class="section-title"><span>🎨</span> 风格系列</div><div class="btn-row" id="seriesBtns"></div></div>
-            <!-- 具体风格（保留） -->
             <div><div class="section-title"><span>📌</span> 具体风格</div><div class="btn-row" id="subStyleBtns"></div></div>
-            <!-- 风格标签已删除 -->
-            <!-- 场地背景（保留） -->
             <div><div class="section-title"><span>🏢</span> 场地背景</div><div class="btn-row" id="venueBtns"></div></div>
-            <!-- 色彩体系完整版 -->
             <div><div class="section-title"><span>🌈</span> 色彩体系（完整版）</div><div class="btn-row" id="colorBtns"></div></div>
-            <!-- 材质臻选 -->
             <div><div class="collapse-header" id="materialHeader"><span class="section-title" style="border-bottom:none;">🔩 材质臻选</span><span class="arrow">▶</span></div>
                 <div class="collapse-body expanded" id="materialBody"><div class="btn-row" id="materialBtns"></div></div></div>
-            <!-- 光影系统 -->
             <div><div class="collapse-header" id="lightHeader"><span class="section-title" style="border-bottom:none;">💡 光影系统</span><span class="arrow">▶</span></div>
                 <div class="collapse-body" id="lightBody"><div class="btn-row" id="lightBtns"></div><div class="btn-group-label" style="margin-top:10px; color:#e7cd95;">✨ 灯光动态</div><div class="btn-row" id="lightEffectBtns"></div></div></div>
-            <!-- 结构形态 -->
             <div><div class="section-title"><span>🏗️</span> 结构形态</div><div class="btn-row" id="structureBtns"></div></div>
-            <!-- 互动偏好 -->
             <div><div class="section-title"><span>🎮</span> 互动偏好</div><div class="btn-row" id="interactionPrefBtns"></div></div>
-            <!-- 内容侧重 -->
             <div><div class="section-title"><span>📋</span> 内容侧重</div><div class="btn-row" id="contentTypeBtns"></div></div>
-            <!-- 尺度定制 -->
             <div><div class="section-title"><span>📐</span> 尺度定制</div><div class="input-row"><div class="input-field"><label>宽度(米)</label><input type="number" id="widthInput" value="10.0" step="0.1"></div><div class="input-field"><label>高度(米)</label><input type="number" id="heightInput" value="5.63" step="0.01"></div></div><div class="lock-option"><input type="checkbox" id="lockRatio" checked><label>黄金16:9锁定</label></div></div>
-            <!-- AI高级模块 -->
             <div><div class="collapse-header" id="advancedHeader"><span class="section-title" style="border-bottom:none;">🧠 AI策展引擎</span><span class="arrow">▶</span></div>
                 <div class="collapse-body" id="advancedBody"><div class="btn-group-label">📖 故事线</div><div class="btn-row" id="storyBtns"></div><div class="btn-group-label">🎮 互动玩法</div><div class="btn-row" id="interactBtns"></div><div class="btn-group-label">💰 成本维度</div><div class="btn-row" id="budgetBtns"></div><div class="btn-group-label">🔧 安装要求</div><div class="btn-row" id="installBtns"></div><div class="btn-group-label">🕐 时间适配</div><div class="btn-row" id="timeBtns"></div></div></div>
             <button class="generate-btn" id="generateBtn">✨ 生 成 2 0 组 提 示 词 ✨</button>
@@ -601,7 +583,65 @@
 
 <script>
 (function(){
-    // ==================== 完整节日分级数据库（11大类，全部展开无折叠）====================
+    // ==================== 1. 新增：设计风格数据库（自动适配核心元素）====================
+    const designStyles = [
+        "新中式风格", "国潮风格", "现代简约风格", "未来科技风格", "赛博朋克风格",
+        "多巴胺风格", "孟菲斯风格", "森林童话风格", "海洋主题风格", "星空宇宙风格",
+        "冰雪主题风格", "热带雨林风格", "欧式宫廷风格", "工业复古风格", "卡通IP风格"
+    ];
+    // 各风格专属元素库（自动匹配核心元素+材质+灯光+IP+装置等）
+    const styleElementsMap = {
+        "新中式风格": ["祥云","如意纹","回纹","窗棂","飞檐","灯笼","折扇","山水画","竹子","松树","梅兰菊竹","宫灯","古建筑","书法","水墨元素","屏风","茶台","石灯笼","青砖","瓦当"],
+        "国潮风格": ["醒狮","锦鲤","仙鹤","龙凤","国风云纹","故宫元素","潮流插画","国风IP","霓虹汉字","传统纹样重构","舞狮","京剧脸谱","麻将","折扇潮改","国潮灯笼"],
+        "现代简约风格": ["几何体块","线性灯光","金属构件","艺术雕塑","极简装置","抽象造型","留白设计","镜面水景","耐候钢","清水混凝土","LED光带","亚克力透光板"],
+        "未来科技风格": ["数字矩阵","AI芯片","光纤灯带","全息投影","悬浮装置","机械结构","能量环","数据流","粒子光效","互动屏","智能感应器","机器人","太空舱"],
+        "赛博朋克风格": ["霓虹灯牌","机械义体","电路纹理","数字城市","未来街区","故障艺术","荧光色块","全息广告牌","雨棚","废弃机械","蒸汽管","义肢装饰"],
+        "多巴胺风格": ["高饱和色彩","气球艺术","糖果装置","波浪曲线","彩虹元素","夸张造型","趣味IP","充气雕塑","毛绒球","亮片帘","波点","爱心云"],
+        "孟菲斯风格": ["几何图形","撞色组合","圆点","锯齿线","三角形","抽象拼贴","跳跃色彩","波浪纹","格格纹","PVC管","塑料家具","孟菲斯图案"],
+        "森林童话风格": ["蘑菇屋","精灵","花朵","藤蔓","树屋","动物IP","发光植物","梦幻森林","苔藓地毯","萤火虫灯","木质秋千","童话城堡"],
+        "海洋主题风格": ["鲸鱼","海豚","贝壳","珊瑚","水母","海浪","船舵","海洋生物群","渔网","灯塔","船锚","珍珠","海星","漂流木"],
+        "星空宇宙风格": ["星球","银河","流星","宇航员","宇宙飞船","星云","天体轨道","陨石","黑洞","星座连线","太空漫步器","月球车"],
+        "冰雪主题风格": ["雪花","冰晶","冰山","极光","冰雕","雪松","冰雪城堡","冰屋","企鹅","北极熊","冰挂","雾凇","发光冰柱"],
+        "热带雨林风格": ["棕榈树","热带植物","火烈鸟","鹦鹉","瀑布","水景","雨林动物","藤蔓","芭蕉叶","蝴蝶","变色龙","热带花卉"],
+        "欧式宫廷风格": ["罗马柱","拱门","皇冠","水晶灯","雕花纹饰","宫廷花园","喷泉","大理石","金箔","天鹅绒","巴洛克镜面","天使雕塑"],
+        "工业复古风格": ["红砖墙","铁艺结构","蒸汽朋克机械","齿轮","铆钉","老工业构件","管道","钨丝灯","旧式仪表","传送带","工具箱"],
+        "卡通IP风格": ["原创IP","公仔","动漫角色","场景化故事装置","互动拍照区","盲盒墙","卡通树","笑脸","冰淇淋车","卡通小火车"]
+    };
+    // 各风格自动补充描述（材质、灯光、IP、互动装置等）
+    const styleExtraDesc = {
+        "新中式风格": "材质以木质、竹编、绢布、青砖为主；灯光采用暖黄色灯笼光、内透宫灯；融入书法、山水画意境；设置古风打卡亭、月洞门景观小品。",
+        "国潮风格": "材质采用亚克力、霓虹灯管、金属烤漆；灯光为红金撞色霓虹、动态光效；IP形象为醒狮、锦鲤、国潮龙；设置国潮街区、霓虹汉字墙、潮玩雕塑。",
+        "现代简约风格": "材质以镜面不锈钢、白色亚克力、混凝土、玻璃为主；灯光使用线性洗墙灯、极简点光源；艺术装置强调几何构成、留白意境；设置抽象雕塑、镜面水景打卡点。",
+        "未来科技风格": "材质应用LED屏幕、光纤、透明树脂、拉丝金属；灯光设计为数据流光带、呼吸灯矩阵；融入AI交互屏、全息投影；设置能量塔、悬浮球体、未来舱互动区。",
+        "赛博朋克风格": "材质包括霓虹灯管、废旧金属、PC板、电路板；灯光以蓝紫/洋红为主、故障闪烁效果；设置机械臂、全息雨棚、霓虹小巷；IP为虚拟偶像、机械宠物。",
+        "多巴胺风格": "材质使用充气PVC、彩色亚克力、毛绒布；灯光高饱和RGB、动态蹦迪光效；装置为彩虹隧道、糖果滑梯；互动打卡点：笑脸镜、泡泡池。",
+        "孟菲斯风格": "材质选用塑料、层压板、水磨石；灯光对比色块照明、几何投影；装饰元素：锯齿线、圆点、波浪纹；设置孟菲斯小屋、抽象拼贴墙。",
+        "森林童话风格": "材质以仿真树皮、苔藓、藤编、木头为主；灯光为暖黄串灯、萤火虫灯、蘑菇发光装置；IP形象：小精灵、兔子、狐狸；设置树屋滑梯、蘑菇房拍照点。",
+        "海洋主题风格": "材质采用玻璃钢、水纹亚克力、蓝色镜面；灯光使用水波纹灯、深海蓝光；装置为鲸鱼尾雕塑、贝壳舞台、水母吊饰；互动区：触摸海浪投影、沙池寻宝。",
+        "星空宇宙风格": "材质使用镜面黑、星空膜、光纤布；灯光为星空投影、流星灯带、环形光晕；设置宇航员模型、月球表面步道、银河隧道。",
+        "冰雪主题风格": "材质主要为透明亚克力、白色PVC、镜面冰晶；灯光冷白光、蓝色极光灯、雪花投影；装置：冰屋、雪橇、发光雪花树；互动区：人造雪屋、冰滑梯。",
+        "热带雨林风格": "材质使用仿真植物、木塑板、水景系统；灯光为绿色洗墙灯、暖黄点光源；装置：瀑布水帘、鹦鹉雕塑、藤蔓秋千；IP：树懒、金刚鹦鹉。",
+        "欧式宫廷风格": "材质采用大理石、金箔、水晶、丝绒；灯光为水晶吊灯、暖色壁灯；装置：罗马柱连廊、喷泉、皇家马车；打卡点：镜厅、王座合影区。",
+        "工业复古风格": "材质使用红砖、铁艺、旧木板、皮革；灯光为钨丝灯泡、暖黄射灯；装置：齿轮墙、蒸汽火车头、旧式电话亭；IP：机械师、齿轮公仔。",
+        "卡通IP风格": "材质使用软泡沫、彩绘玻璃钢、毛绒布料；灯光柔和彩色灯带；IP形象：品牌专属卡通角色（熊猫、兔子等）；设置故事场景打卡点、角色合影区。"
+    };
+    // 节庆自动适配元素（春节、元宵等）
+    const festivalAutoElements = {
+        "春节": ["龙","蛇（生肖）","灯笼","春联","中国结","红包","福字","烟花","年兽","爆竹"],
+        "元宵节": ["花灯","灯谜","灯笼矩阵","汤圆元素","兔子灯","宫灯"],
+        "情人节": ["爱心","玫瑰","丘比特","钻戒","告白场景","粉色气球","情书装置"],
+        "妇女节": ["鲜花","蝴蝶","女性艺术装置","翅膀","香氛墙","优雅雕塑"],
+        "儿童节": ["卡通IP","玩具","气球","积木","游乐元素","彩虹跑道","泡泡机"],
+        "端午节": ["龙舟","粽子","艾草","五彩绳","鼓","水浪纹"],
+        "七夕节": ["鹊桥","牛郎织女","爱心装置","银河","喜鹊","同心锁"],
+        "中秋节": ["月亮","玉兔","桂花","宫灯","团圆场景","月饼","嫦娥"],
+        "国庆节": ["天安门","红旗","和平鸽","烟花","城市地标","长城"],
+        "万圣节": ["南瓜灯","幽灵","魔法城堡","蝙蝠","蜘蛛网","骷髅"],
+        "圣诞节": ["圣诞树","麋鹿","雪橇","礼盒","雪花","圣诞老人","铃铛"],
+        "元旦跨年": ["数字装置","倒计时装置","烟花艺术装置","彩带","气球"]
+    };
+
+    // ==================== 原有节日分级数据库 ====================
     const festivalHierarchy = [
         { name: "一、中国传统节日", sub: [
             { name: "春节系列", festivals: ["春节","除夕","小年","开门红","开工大吉","元宵节","迎财神","接五路财神","龙抬头"] },
@@ -662,7 +702,8 @@
             { name: "二次元节日", festivals: ["漫展嘉年华","动漫节","国风文化节","汉服节"] }
         ]}
     ];
-    // 全量元素库（完整保留）
+
+    // 全量元素库（原有9大类，用于非风格适配场景）
     const fullElementsLibrary = {
         "吉祥类": ["祥云","如意纹","回纹","瑞兽纹","八宝纹","金元宝","铜钱","福袋","福字","财字","招财猫","聚宝盆","玉佩","印章","宫灯","华盖","龙纹","凤纹","麒麟","貔貅","仙鹤","锦鲤","金鱼"],
         "花卉类": ["牡丹","梅花","兰花","竹子","菊花","荷花","桃花","樱花","山茶花","桂花","银杏叶","枫叶"],
@@ -674,18 +715,29 @@
         "科技未来": ["科技线条","数据流","光纤灯","几何矩阵","发光圆环","悬浮立方体","AI芯片纹理","星际轨道","能量核心","机械结构","镭射镜面","全息屏","数字粒子","激光矩阵"],
         "艺术装置": ["镜面不锈钢","气膜装置","悬浮雕塑","几何艺术体","动态风车","风动装置","镜面球","光影雕塑","巨型字母","艺术拱门","异形结构","参数化曲面"]
     };
+
+    // 原有节日特定元素映射
     function getFestivalElements(festival) {
         const map = {
             "春节":["福字","中国结","灯笼","红包","金元宝","祥云","烟花","舞狮","春联","锦鲤","金龙","财神","鞭炮","梅花","宫灯"],
-            "元宵节":["花灯","汤圆","兔子灯","灯谜","宫灯","烟火","月亮","舞龙","灯海","荷花灯"],"中秋节":["月亮","玉兔","桂花","月饼","灯笼","祥云","嫦娥","宫灯","桂花树","琉璃月球"],
-            "端午节":["龙舟","粽子","艾草","香囊","水浪","龙纹","鼓","竹叶","屈原","五彩绳"],"七夕节":["银河","鹊桥","玫瑰","爱心","月亮","花海","纱幔","蝴蝶","流星灯","告白墙"],
-            "圣诞节":["圣诞树","雪花","礼盒","麋鹿","铃铛","松枝","彩灯","姜饼人","红绿丝带","极光"],"万圣节":["南瓜灯","骷髅","蝙蝠","蜘蛛网","古堡","幽灵","魔法书","黑猫","紫黑灯光","暗黑森林"],
-            "国庆节":["五星红旗","天安门","红绸","和平鸽","烟花","金色五角星","红金灯光","山河图","中国地图"],"情人节":["玫瑰","爱心","气球","花艺","钻石","水晶灯","蝴蝶结","羽毛","粉色灯光","LOVE字母"],
-            "儿童节":["彩虹","糖果","气球","积木","旋转木马","泡泡","卡通IP","云朵","马卡龙色","玩具熊"],"母亲节":["康乃馨","爱心","丝带","温馨灯光","母子雕塑","感恩花墙"],"父亲节":["领带","手表","胡须","男士剪影","深蓝色调","奖杯"]
+            "除夕":["团圆饭","守岁灯","红包","鞭炮","中国结","福字","灯笼","年兽","烛台","全家福装置"],
+            "元宵节":["花灯","汤圆","兔子灯","灯谜","宫灯","烟火","月亮","舞龙","灯海","荷花灯"],
+            "中秋节":["月亮","玉兔","桂花","月饼","灯笼","祥云","嫦娥","宫灯","桂花树","琉璃月球"],
+            "端午节":["龙舟","粽子","艾草","香囊","水浪","龙纹","鼓","竹叶","屈原","五彩绳"],
+            "七夕节":["银河","鹊桥","玫瑰","爱心","月亮","花海","纱幔","蝴蝶","流星灯","告白墙"],
+            "圣诞节":["圣诞树","雪花","礼盒","麋鹿","铃铛","松枝","彩灯","姜饼人","红绿丝带","极光"],
+            "万圣节":["南瓜灯","骷髅","蝙蝠","蜘蛛网","古堡","幽灵","魔法书","黑猫","紫黑灯光","暗黑森林"],
+            "国庆节":["五星红旗","天安门","红绸","和平鸽","烟花","金色五角星","红金灯光","山河图","中国地图"],
+            "情人节":["玫瑰","爱心","气球","花艺","钻石","水晶灯","蝴蝶结","羽毛","粉色灯光","LOVE字母"],
+            "儿童节":["彩虹","糖果","气球","积木","旋转木马","泡泡","卡通IP","云朵","马卡龙色","玩具熊"],
+            "母亲节":["康乃馨","爱心","丝带","温馨灯光","母子雕塑","感恩花墙","相框","柔美纱幔"],
+            "父亲节":["领带","手表","胡须","男士剪影","深蓝色调","奖杯","太阳眼镜","酷感线条"],
+            "元旦":["倒计时数字","烟花","气球","彩带","新年快乐","星光灯","礼炮","未来感","金色钟"]
         };
         return map[festival] || [];
     }
-    // ==================== 色彩体系完整版（全量） ====================
+
+    // 色彩体系完整版
     const colorFullList = [
         "中国红","帝王黄","宝石蓝","孔雀绿","翡翠绿","松石绿","深海蓝","星空黑","珍珠白","奶油白","雾霾灰","银灰色","香槟金","古铜金","玫瑰金","哑光黑",
         "红金配色","黑金配色","朱砂红+鎏金","中国红+祥云金","故宫红+琉璃黄","赤金色","龙鳞金","宫廷蓝金","墨绿色+古金","丹霞橙+金",
@@ -696,7 +748,8 @@
         "莫兰迪粉","莫兰迪蓝","莫兰迪绿","雾灰紫","奶咖灰","烟灰蓝","浅豆沙","米杏色","低饱和橄榄绿",
         "蓝紫渐变","粉紫渐变","红橙渐变","金橙渐变","青蓝渐变","极光渐变","彩虹渐变","日落渐变"
     ];
-    // 其他所有选项库（不含风格标签）
+
+    // 原有其他选项库
     const seriesOptions = ['国风系','商业潮流系','卡通IP系','节庆主题系','艺术装置系','自然生态系','民族文化系','引流型'];
     const subStyleMap = { '国风系': ['传统吉祥','国潮','新中式','宋式美学','唐风','东方禅意','古典宫廷','非遗风','山海经风','汉服风','戏曲风','水墨风','国风赛博'], '商业潮流系': ['潮玩','年轻化潮流','朋克','涂鸦','街头艺术','Y2K','解构主义','未来科技','赛博朋克','蒸汽朋克','AI数字艺术','NFT视觉风'], '卡通IP系': ['卡通','Q版','二次元','泡泡玛特风','治愈系','萌宠系','童话系','儿童互动','动漫IP','盲盒风','乐园风'], '节庆主题系': ['春节','元宵','中秋','端午','七夕','圣诞','万圣节','情人节','跨年','开学季','毕业季','店庆','周年庆'], '艺术装置系': ['极简艺术','镜面艺术','几何艺术','光影艺术','装置艺术','沉浸式','互动艺术','数字媒体艺术','AI光影','参数化设计'], '自然生态系': ['森林系','花艺系','热带植物','海洋系','星空宇宙','沙漠风','冰雪风','自然疗愈','可持续环保','原木生态'], '民族文化系': ['苗族','藏族','蒙古族','傣族','敦煌','西域','少数民族图腾','民俗文化','地域文化'], '引流型': ['打卡传播型','互动型','微互动型','商业转化型','快闪活动型','发布会活动型','品牌展示型','夜景灯光型','短视频传播型','小红书出片型','抖音直播型'] };
     const venueFullList = ['购物中心外广场','商场中庭挑空区','商业街主入口','酒店大堂背景墙','写字楼前台大厅','社区中心广场','文化街区入口','景区游客中心','会展中心序厅','机场出发大厅','高铁站候车厅','博物馆入口大厅','干净米白纯色背景','深灰纯色背景','深夜蓝纯色背景','品牌旗舰店入口'];
@@ -711,12 +764,14 @@
     const budgetList = ['低预算(≤5万)','中预算(5-20万)','高预算(20万+)','快闪低成本(≤3万)','高端定制(50万+)'];
     const installList = ['可拆卸','重复利用','快速搭建','防雨','防风','防火','模块化组装','免工具安装'];
     const timeList = ['白天效果','夜景效果','四季变化','节庆切换','日夜双模式'];
-    
-    // 状态（删除了selectedStyleTagSet）
+
+    // 状态集合
+    let selectedDesignStyle = null;          // 新增：当前选中的设计风格（单选）
     let selectedFestivalsSet = new Set();
     let selectedElementsSet = new Set();
-    let selectedSeriesSet = new Set(), selectedSubStyleSet = new Set(), selectedVenueSet = new Set(), selectedColorSet = new Set(), selectedMaterialSet = new Set(), selectedLightSet = new Set(), selectedLightEffectSet = new Set(), selectedStructureSet = new Set(), selectedInteractionPrefSet = new Set(), selectedContentTypeSet = new Set(), selectedStorySet = new Set(), selectedInteractSet = new Set(), selectedBudgetSet = new Set(), selectedInstallSet = new Set(), selectedTimeSet = new Set();
-    
+    let selectedSeriesSet = new Set(); 
+    let selectedSubStyleSet = new Set(), selectedVenueSet = new Set(), selectedColorSet = new Set(), selectedMaterialSet = new Set(), selectedLightSet = new Set(), selectedLightEffectSet = new Set(), selectedStructureSet = new Set(), selectedInteractionPrefSet = new Set(), selectedContentTypeSet = new Set(), selectedStorySet = new Set(), selectedInteractSet = new Set(), selectedBudgetSet = new Set(), selectedInstallSet = new Set(), selectedTimeSet = new Set();
+
     // DOM 元素
     const projectDescInput = document.getElementById('projectDescInput');
     const frameProjectDesc = document.getElementById('frameProjectDesc');
@@ -729,8 +784,134 @@
     const heightInput = document.getElementById('heightInput');
     const lockRatioCheck = document.getElementById('lockRatio');
     let currentPrompts = [];
-    
-    // 通用渲染函数（无风格标签）
+
+    // 渲染设计风格单选按钮（新增）
+    function renderDesignStyleBtns() {
+        const container = document.getElementById('designStyleBtns');
+        if(!container) return;
+        container.innerHTML = designStyles.map(style => `<button class="style-btn ${selectedDesignStyle === style ? 'selected' : ''}" data-style="${style}">${style}</button>`).join('');
+        container.querySelectorAll('.style-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const newStyle = btn.dataset.style;
+                if(selectedDesignStyle === newStyle) {
+                    selectedDesignStyle = null; // 取消选中
+                } else {
+                    selectedDesignStyle = newStyle;
+                }
+                renderDesignStyleBtns();          // 刷新UI高亮
+                autoAdaptElementsByStyleAndFestival(); // 自动适配核心元素
+                renderCoreElements();              // 刷新元素面板
+            });
+        });
+    }
+
+    // 自动适配：根据选中的设计风格 + 选中的节日主题，自动设置核心元素
+    function autoAdaptElementsByStyleAndFestival() {
+        let newElementsSet = new Set();
+        // 1. 如果选中了设计风格，则加入该风格专属元素（取前12个代表性元素）
+        if(selectedDesignStyle && styleElementsMap[selectedDesignStyle]) {
+            const styleElems = styleElementsMap[selectedDesignStyle];
+            styleElems.slice(0, 12).forEach(e => newElementsSet.add(e));
+        }
+        // 2. 如果选中了节日主题，则加入该节日的自动适配元素（取前8个）
+        for(let fest of selectedFestivalsSet) {
+            // 标准节日名称映射（支持春节、元宵等）
+            let key = null;
+            if(fest.includes("春节")) key = "春节";
+            else if(fest.includes("元宵")) key = "元宵节";
+            else if(fest.includes("情人")) key = "情人节";
+            else if(fest.includes("妇女") || fest.includes("女神")) key = "妇女节";
+            else if(fest.includes("儿童")) key = "儿童节";
+            else if(fest.includes("端午")) key = "端午节";
+            else if(fest.includes("七夕")) key = "七夕节";
+            else if(fest.includes("中秋")) key = "中秋节";
+            else if(fest.includes("国庆")) key = "国庆节";
+            else if(fest.includes("万圣")) key = "万圣节";
+            else if(fest.includes("圣诞")) key = "圣诞节";
+            else if(fest.includes("元旦") || fest.includes("跨年")) key = "元旦跨年";
+            if(key && festivalAutoElements[key]) {
+                festivalAutoElements[key].slice(0, 8).forEach(e => newElementsSet.add(e));
+            }
+        }
+        // 如果风格和节日都没有，则不清空原有？但为了规则，保持原有选中（用户可手动选）
+        if(selectedDesignStyle || selectedFestivalsSet.size > 0) {
+            // 覆盖替换原选中元素，确保风格纯净
+            selectedElementsSet = newElementsSet;
+        }
+        updateElemDisplay();
+    }
+
+    // 核心元素面板渲染（根据风格和节日联动展示推荐元素）
+    function renderCoreElements() {
+        let allElems = new Set();
+        // 优先使用风格专属元素库（若选中设计风格）
+        if(selectedDesignStyle && styleElementsMap[selectedDesignStyle]) {
+            styleElementsMap[selectedDesignStyle].forEach(e => allElems.add(e));
+        } else {
+            // 否则使用全量库
+            for(let cat in fullElementsLibrary) fullElementsLibrary[cat].forEach(e => allElems.add(e));
+        }
+        // 加入节日元素
+        for(let fest of selectedFestivalsSet) {
+            getFestivalElements(fest).forEach(e => allElems.add(e));
+        }
+        const elemList = Array.from(allElems).sort();
+        let html = `<div class="ele-grid">`;
+        elemList.forEach(elem => {
+            const isSelected = selectedElementsSet.has(elem);
+            html += `<span class="elem-badge ${isSelected ? 'selected' : ''}" data-elem="${elem.replace(/"/g,'&quot;')}">${elem}</span>`;
+        });
+        html += `</div>`;
+        document.getElementById('coreElementPanel').innerHTML = html;
+        document.querySelectorAll('.elem-badge').forEach(el => {
+            el.addEventListener('click', () => {
+                const elem = el.dataset.elem;
+                if(selectedElementsSet.has(elem)) selectedElementsSet.delete(elem);
+                else selectedElementsSet.add(elem);
+                updateElemDisplay();
+                renderCoreElements();
+            });
+        });
+        updateElemDisplay();
+    }
+    function updateElemDisplay() {
+        const arr = Array.from(selectedElementsSet);
+        document.getElementById('selectedElemDisplay').innerHTML = `✨ 当前选中元素: ${arr.join(' · ') || '无'}`;
+    }
+    document.getElementById('clearElemBtn').addEventListener('click',()=>{ selectedElementsSet.clear(); renderCoreElements(); updateElemDisplay(); });
+
+    // 节日树渲染
+    function renderFestivalTree() {
+        const container = document.getElementById('festivalTreeContainer');
+        if(!container) return;
+        let html = '';
+        for(let cat of festivalHierarchy) {
+            html += `<div class="tree-category"><div class="cat-title">📌 ${cat.name}</div>`;
+            for(let sub of cat.sub) {
+                html += `<div class="subcat-title">▸ ${sub.name}</div><div class="festival-check-list">`;
+                for(let fest of sub.festivals) {
+                    const isChecked = selectedFestivalsSet.has(fest);
+                    html += `<label class="festival-check-item" data-festival="${fest.replace(/"/g,'&quot;')}">
+                                <input type="checkbox" value="${fest}" ${isChecked ? 'checked' : ''}> <span>${fest}</span>
+                             </label>`;
+                }
+                html += `</div>`;
+            }
+            html += `</div>`;
+        }
+        container.innerHTML = html;
+        container.querySelectorAll('.festival-check-item input').forEach(chk => {
+            chk.addEventListener('change', (e) => {
+                const festName = chk.value;
+                if(chk.checked) selectedFestivalsSet.add(festName);
+                else selectedFestivalsSet.delete(festName);
+                autoAdaptElementsByStyleAndFestival(); // 节日变化自动适配元素
+                renderCoreElements();
+            });
+        });
+    }
+
+    // 通用渲染函数（原有）
     function renderMultiSelect(containerId, options, selectedSet, onChange) {
         const container = document.getElementById(containerId);
         if(!container) return;
@@ -796,80 +977,21 @@
             });
         });
     }
-    function renderCoreElements() {
-        let allElems = new Set();
-        for(let cat in fullElementsLibrary) fullElementsLibrary[cat].forEach(e => allElems.add(e));
-        for(let fest of selectedFestivalsSet) {
-            getFestivalElements(fest).forEach(e => allElems.add(e));
-        }
-        const elemList = Array.from(allElems).sort();
-        let html = `<div class="ele-grid">`;
-        elemList.forEach(elem => {
-            const isSelected = selectedElementsSet.has(elem);
-            html += `<span class="elem-badge ${isSelected ? 'selected' : ''}" data-elem="${elem.replace(/"/g,'&quot;')}">${elem}</span>`;
-        });
-        html += `</div>`;
-        document.getElementById('coreElementPanel').innerHTML = html;
-        document.querySelectorAll('.elem-badge').forEach(el => {
-            el.addEventListener('click', () => {
-                const elem = el.dataset.elem;
-                if(selectedElementsSet.has(elem)) selectedElementsSet.delete(elem);
-                else selectedElementsSet.add(elem);
-                updateElemDisplay();
-                renderCoreElements();
-            });
-        });
-        updateElemDisplay();
-    }
-    function updateElemDisplay() {
-        const arr = Array.from(selectedElementsSet);
-        document.getElementById('selectedElemDisplay').innerHTML = `✨ 当前选中元素: ${arr.join(' · ') || '无'}`;
-    }
-    document.getElementById('clearElemBtn').addEventListener('click',()=>{ selectedElementsSet.clear(); renderCoreElements(); updateElemDisplay(); });
-    
-    // 节日树（完全展开，多列网格）
-    function renderFestivalTree() {
-        const container = document.getElementById('festivalTreeContainer');
-        if(!container) return;
-        let html = '';
-        for(let cat of festivalHierarchy) {
-            html += `<div class="tree-category"><div class="cat-title">📌 ${cat.name}</div>`;
-            for(let sub of cat.sub) {
-                html += `<div class="subcat-title">▸ ${sub.name}</div><div class="festival-check-list">`;
-                for(let fest of sub.festivals) {
-                    const isChecked = selectedFestivalsSet.has(fest);
-                    html += `<label class="festival-check-item" data-festival="${fest.replace(/"/g,'&quot;')}">
-                                <input type="checkbox" value="${fest}" ${isChecked ? 'checked' : ''}> <span>${fest}</span>
-                             </label>`;
-                }
-                html += `</div>`;
-            }
-            html += `</div>`;
-        }
-        container.innerHTML = html;
-        container.querySelectorAll('.festival-check-item input').forEach(chk => {
-            chk.addEventListener('change', (e) => {
-                const festName = chk.value;
-                if(chk.checked) selectedFestivalsSet.add(festName);
-                else selectedFestivalsSet.delete(festName);
-                renderCoreElements();
-            });
-        });
-    }
-    
+
     function syncSize(source) { if(!lockRatioCheck.checked) return; let w=parseFloat(widthInput.value), h=parseFloat(heightInput.value); if(source==='width'&&!isNaN(w)) heightInput.value=(w/1.777).toFixed(2); else if(source==='height'&&!isNaN(h)) widthInput.value=(h*1.777).toFixed(1); }
     widthInput.addEventListener('input',()=>syncSize('width')); heightInput.addEventListener('input',()=>syncSize('height'));
     function setupCollapse(idH,idB) { let h=document.getElementById(idH), b=document.getElementById(idB); if(h&&b) h.addEventListener('click',()=>{ let open=b.classList.contains('expanded'); if(open){b.classList.remove('expanded');h.classList.remove('open');}else{b.classList.add('expanded');h.classList.add('open');} }); }
     function setLoading() { promptsListDiv.innerHTML='<div class="prompt-item"><div class="prompt-number">⏳ 灵境生成中</div><div class="prompt-text">正在融合您的全维度美学参数，请静候……</div></div>'; countDisplay.innerText='0/20'; extraOutput.style.display='none'; }
     async function performCopy(text) { try { await navigator.clipboard.writeText(text); return true; } catch(e) { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true; } }
     function setupCopyButtons() { document.querySelectorAll('.copy-btn').forEach(btn => { const newBtn=btn.cloneNode(true); btn.parentNode.replaceChild(newBtn,btn); newBtn.addEventListener('click',async function(e){ e.preventDefault(); const idx=parseInt(this.dataset.index); if(isNaN(idx)||idx<0||idx>=currentPrompts.length) return; const text=currentPrompts[idx]; this.disabled=true; const orig=this.innerHTML; const ok=await performCopy(text); if(ok){ this.innerHTML='✓ 已拓印'; setTimeout(()=>{ this.innerHTML=orig; this.disabled=false; },1800); } else { this.innerHTML='📋 手动复制'; setTimeout(()=>{ this.innerHTML=orig; this.disabled=false; },1800); } }); }); }
-    
+
+    // 生成提示词：原有逻辑基础上，根据设计风格自动追加适配描述（材质、灯光、IP、装置等）
     function generatePrompts() {
         const userW = parseFloat(widthInput.value), userH = parseFloat(heightInput.value);
         const parts = [];
+        // 原有选择项
         if(selectedSeriesSet.size) parts.push(`风格系列:${Array.from(selectedSeriesSet).join('/')}`);
         if(selectedSubStyleSet.size) parts.push(`具体风格:${Array.from(selectedSubStyleSet).join('/')}`);
-        // 风格标签已移除
         if(selectedVenueSet.size) parts.push(`场地:${Array.from(selectedVenueSet).join('/')}`);
         if(selectedFestivalsSet.size) parts.push(`节日主题:${Array.from(selectedFestivalsSet).join('/')}`);
         if(selectedElementsSet.size) parts.push(`核心元素:${Array.from(selectedElementsSet).join('·')}`);
@@ -884,29 +1006,45 @@
         if(selectedBudgetSet.size) parts.push(`预算:${Array.from(selectedBudgetSet).join('/')}`);
         if(selectedInstallSet.size) parts.push(`安装:${Array.from(selectedInstallSet).join('/')}`);
         if(selectedTimeSet.size) parts.push(`时间:${Array.from(selectedTimeSet).join('/')}`);
+        
+        // 新增：自动适配的设计风格描述
+        let styleAutoDesc = "";
+        if(selectedDesignStyle && styleExtraDesc[selectedDesignStyle]) {
+            styleAutoDesc = `【设计风格：${selectedDesignStyle}】${styleExtraDesc[selectedDesignStyle]} 核心视觉符号包括：${styleElementsMap[selectedDesignStyle]?.slice(0,8).join('、') || ''}。`;
+        }
+        
         let fW = userW && !isNaN(userW) && userW>0 ? userW.toFixed(1) : "10.0";
         let fH = userH && !isNaN(userH) && userH>0 ? userH.toFixed(2) : (parseFloat(fW)/1.777).toFixed(2);
         const dims = `总宽${fW}米 × 高${fH}米 16:9`;
         const descStr = parts.length ? `，${parts.join('，')}` : '';
+        let projectDescPart = "";
+        const userProjectDesc = projectDescInput.value.trim();
+        if(userProjectDesc !== "") projectDescPart = `项目背景：${userProjectDesc}。`;
+        
+        const base = `正立面横向超宽幅美陈装置，${dims}，构图居中留白≥30%${descStr}。${projectDescPart}${styleAutoDesc}视觉锚点强，适合沉浸打卡。写实级3D渲染，8k画质，正面完整展示，无透视变形，情绪光效，电影质感。`;
         const prompts = [];
-        for(let i=0;i<20;i++) prompts.push(`正立面横向超宽幅美陈装置，${dims}，构图居中留白≥30%${descStr}。视觉锚点强，适合沉浸打卡。写实级3D渲染，8k画质，正面完整展示，无透视变形，情绪光效，电影质感。`);
+        for(let i=0;i<20;i++) prompts.push(base);
         return prompts;
     }
+
     function renderPrompts(prompts) {
         if(!prompts.length){ promptsListDiv.innerHTML='<div class="prompt-item">生成失败</div>'; return; }
         let html=''; prompts.forEach((p,i)=>{ html+=`<div class="prompt-item"><div class="prompt-number">🏮 第${i+1}组 · 灵境帧</div><div class="prompt-text">${p}</div><button class="copy-btn" data-index="${i}">📋 复制</button></div>`; });
         promptsListDiv.innerHTML=html; countDisplay.innerText=`${prompts.length}/20`;
         setupCopyButtons();
         const selectedCount = { 风格:selectedSeriesSet.size, 具体风格:selectedSubStyleSet.size, 场地:selectedVenueSet.size, 节日:selectedFestivalsSet.size, 元素:selectedElementsSet.size, 色彩:selectedColorSet.size, 材质:selectedMaterialSet.size, 灯光:selectedLightSet.size+selectedLightEffectSet.size, 结构:selectedStructureSet.size, 互动:selectedInteractionPrefSet.size, 内容:selectedContentTypeSet.size, 故事:selectedStorySet.size, 玩法:selectedInteractSet.size, 预算:selectedBudgetSet.size, 安装:selectedInstallSet.size, 时间:selectedTimeSet.size };
-        extraContent.innerHTML = `📊 已选维度：${Object.entries(selectedCount).filter(([k,v])=>v>0).map(([k,v])=>`${k}(${v})`).join(' · ') || '基础框架'}<br>📝 项目描述：${projectDescInput.value}<br>📐 尺度：${widthInput.value}×${heightInput.value}米`;
+        const activeModules = Object.entries(selectedCount).filter(([k,v])=>v>0).map(([k,v])=>`${k}(${v})`).join(' · ') || '无任何选择（仅尺寸框架）';
+        extraContent.innerHTML = `📊 已选维度：${activeModules}<br>🎨 自动适配风格：${selectedDesignStyle || '未选择'}<br>📝 项目描述：${projectDescInput.value.trim() || '（未输入）'}<br>📐 尺度：${widthInput.value}×${heightInput.value}米`;
         extraOutput.style.display='block';
     }
+
     function handleGenerate() { setLoading(); setTimeout(()=>{ const prompts=generatePrompts(); currentPrompts=prompts; renderPrompts(prompts); },120); }
     generateBtn.addEventListener('click', handleGenerate);
-    
+
     function init() {
         projectDescInput.addEventListener('input',()=>{ frameProjectDesc.textContent=projectDescInput.value.trim() || '古月AI智能体'; });
         frameProjectDesc.textContent=projectDescInput.value.trim() || '古月AI智能体';
+        renderDesignStyleBtns();          // 新增设计风格板块
         renderFestivalTree();
         renderMultiSelect('seriesBtns', seriesOptions, selectedSeriesSet, () => { renderSubStyleMulti(); });
         renderSubStyleMulti();
