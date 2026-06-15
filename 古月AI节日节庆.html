@@ -562,20 +562,30 @@
             <div class="selected-elem-area" id="selectedElemDisplay">✨ 当前选中元素: 无</div>
             <button id="clearElemBtn" class="clear-elem">🗑 清空所有元素</button>
 
-            <!-- 风格系列等所有原有模块完整保留 -->
+            <!-- 风格系列（保留） -->
             <div><div class="section-title"><span>🎨</span> 风格系列</div><div class="btn-row" id="seriesBtns"></div></div>
+            <!-- 具体风格（保留） -->
             <div><div class="section-title"><span>📌</span> 具体风格</div><div class="btn-row" id="subStyleBtns"></div></div>
-            <div><div class="section-title"><span>🏷️</span> 风格标签</div><div class="btn-row" id="styleTagBtns"></div></div>
+            <!-- 风格标签已删除 -->
+            <!-- 场地背景（保留） -->
             <div><div class="section-title"><span>🏢</span> 场地背景</div><div class="btn-row" id="venueBtns"></div></div>
+            <!-- 色彩体系完整版 -->
             <div><div class="section-title"><span>🌈</span> 色彩体系（完整版）</div><div class="btn-row" id="colorBtns"></div></div>
+            <!-- 材质臻选 -->
             <div><div class="collapse-header" id="materialHeader"><span class="section-title" style="border-bottom:none;">🔩 材质臻选</span><span class="arrow">▶</span></div>
                 <div class="collapse-body expanded" id="materialBody"><div class="btn-row" id="materialBtns"></div></div></div>
+            <!-- 光影系统 -->
             <div><div class="collapse-header" id="lightHeader"><span class="section-title" style="border-bottom:none;">💡 光影系统</span><span class="arrow">▶</span></div>
                 <div class="collapse-body" id="lightBody"><div class="btn-row" id="lightBtns"></div><div class="btn-group-label" style="margin-top:10px; color:#e7cd95;">✨ 灯光动态</div><div class="btn-row" id="lightEffectBtns"></div></div></div>
+            <!-- 结构形态 -->
             <div><div class="section-title"><span>🏗️</span> 结构形态</div><div class="btn-row" id="structureBtns"></div></div>
+            <!-- 互动偏好 -->
             <div><div class="section-title"><span>🎮</span> 互动偏好</div><div class="btn-row" id="interactionPrefBtns"></div></div>
+            <!-- 内容侧重 -->
             <div><div class="section-title"><span>📋</span> 内容侧重</div><div class="btn-row" id="contentTypeBtns"></div></div>
+            <!-- 尺度定制 -->
             <div><div class="section-title"><span>📐</span> 尺度定制</div><div class="input-row"><div class="input-field"><label>宽度(米)</label><input type="number" id="widthInput" value="10.0" step="0.1"></div><div class="input-field"><label>高度(米)</label><input type="number" id="heightInput" value="5.63" step="0.01"></div></div><div class="lock-option"><input type="checkbox" id="lockRatio" checked><label>黄金16:9锁定</label></div></div>
+            <!-- AI高级模块 -->
             <div><div class="collapse-header" id="advancedHeader"><span class="section-title" style="border-bottom:none;">🧠 AI策展引擎</span><span class="arrow">▶</span></div>
                 <div class="collapse-body" id="advancedBody"><div class="btn-group-label">📖 故事线</div><div class="btn-row" id="storyBtns"></div><div class="btn-group-label">🎮 互动玩法</div><div class="btn-row" id="interactBtns"></div><div class="btn-group-label">💰 成本维度</div><div class="btn-row" id="budgetBtns"></div><div class="btn-group-label">🔧 安装要求</div><div class="btn-row" id="installBtns"></div><div class="btn-group-label">🕐 时间适配</div><div class="btn-row" id="timeBtns"></div></div></div>
             <button class="generate-btn" id="generateBtn">✨ 生 成 2 0 组 提 示 词 ✨</button>
@@ -675,7 +685,7 @@
         };
         return map[festival] || [];
     }
-    // ==================== 色彩体系完整版（全量恢复） ====================
+    // ==================== 色彩体系完整版（全量） ====================
     const colorFullList = [
         "中国红","帝王黄","宝石蓝","孔雀绿","翡翠绿","松石绿","深海蓝","星空黑","珍珠白","奶油白","雾霾灰","银灰色","香槟金","古铜金","玫瑰金","哑光黑",
         "红金配色","黑金配色","朱砂红+鎏金","中国红+祥云金","故宫红+琉璃黄","赤金色","龙鳞金","宫廷蓝金","墨绿色+古金","丹霞橙+金",
@@ -686,10 +696,9 @@
         "莫兰迪粉","莫兰迪蓝","莫兰迪绿","雾灰紫","奶咖灰","烟灰蓝","浅豆沙","米杏色","低饱和橄榄绿",
         "蓝紫渐变","粉紫渐变","红橙渐变","金橙渐变","青蓝渐变","极光渐变","彩虹渐变","日落渐变"
     ];
-    // 其他所有选项库
+    // 其他所有选项库（不含风格标签）
     const seriesOptions = ['国风系','商业潮流系','卡通IP系','节庆主题系','艺术装置系','自然生态系','民族文化系','引流型'];
     const subStyleMap = { '国风系': ['传统吉祥','国潮','新中式','宋式美学','唐风','东方禅意','古典宫廷','非遗风','山海经风','汉服风','戏曲风','水墨风','国风赛博'], '商业潮流系': ['潮玩','年轻化潮流','朋克','涂鸦','街头艺术','Y2K','解构主义','未来科技','赛博朋克','蒸汽朋克','AI数字艺术','NFT视觉风'], '卡通IP系': ['卡通','Q版','二次元','泡泡玛特风','治愈系','萌宠系','童话系','儿童互动','动漫IP','盲盒风','乐园风'], '节庆主题系': ['春节','元宵','中秋','端午','七夕','圣诞','万圣节','情人节','跨年','开学季','毕业季','店庆','周年庆'], '艺术装置系': ['极简艺术','镜面艺术','几何艺术','光影艺术','装置艺术','沉浸式','互动艺术','数字媒体艺术','AI光影','参数化设计'], '自然生态系': ['森林系','花艺系','热带植物','海洋系','星空宇宙','沙漠风','冰雪风','自然疗愈','可持续环保','原木生态'], '民族文化系': ['苗族','藏族','蒙古族','傣族','敦煌','西域','少数民族图腾','民俗文化','地域文化'], '引流型': ['打卡传播型','互动型','微互动型','商业转化型','快闪活动型','发布会活动型','品牌展示型','夜景灯光型','短视频传播型','小红书出片型','抖音直播型'] };
-    const styleTagList = ["国潮风","新中式","现代极简","赛博朋克","未来科技","梦幻童话","法式轻奢","INS风","艺术装置风","东方禅意","新年庙会风","宫廷风","蒸汽朋克","参数化艺术","潮玩艺术"];
     const venueFullList = ['购物中心外广场','商场中庭挑空区','商业街主入口','酒店大堂背景墙','写字楼前台大厅','社区中心广场','文化街区入口','景区游客中心','会展中心序厅','机场出发大厅','高铁站候车厅','博物馆入口大厅','干净米白纯色背景','深灰纯色背景','深夜蓝纯色背景','品牌旗舰店入口'];
     const materialFullList = ["亚克力","镜面不锈钢","拉丝不锈钢","铝板","KT板","PVC","木饰面","发光灯膜","透光布","软膜天花","玻璃钢","树脂","水晶材质","镭射膜","LED屏","雾化玻璃","气模","仿真花艺","竹艺","布艺","纸艺","水波纹不锈钢","发光树脂","数字屏幕","AI动态屏"];
     const lightFullList = ["洗墙灯","线性灯","点光源","霓虹灯","发光字","星空灯","水波纹灯","激光灯","动态追光","呼吸灯","光纤灯","氛围投影","互动感应灯","地面投影","轮廓暖黄灯带","内透光","霓虹灯带","全息投影灯"];
@@ -703,10 +712,10 @@
     const installList = ['可拆卸','重复利用','快速搭建','防雨','防风','防火','模块化组装','免工具安装'];
     const timeList = ['白天效果','夜景效果','四季变化','节庆切换','日夜双模式'];
     
-    // 状态
+    // 状态（删除了selectedStyleTagSet）
     let selectedFestivalsSet = new Set();
     let selectedElementsSet = new Set();
-    let selectedSeriesSet = new Set(), selectedSubStyleSet = new Set(), selectedStyleTagSet = new Set(), selectedVenueSet = new Set(), selectedColorSet = new Set(), selectedMaterialSet = new Set(), selectedLightSet = new Set(), selectedLightEffectSet = new Set(), selectedStructureSet = new Set(), selectedInteractionPrefSet = new Set(), selectedContentTypeSet = new Set(), selectedStorySet = new Set(), selectedInteractSet = new Set(), selectedBudgetSet = new Set(), selectedInstallSet = new Set(), selectedTimeSet = new Set();
+    let selectedSeriesSet = new Set(), selectedSubStyleSet = new Set(), selectedVenueSet = new Set(), selectedColorSet = new Set(), selectedMaterialSet = new Set(), selectedLightSet = new Set(), selectedLightEffectSet = new Set(), selectedStructureSet = new Set(), selectedInteractionPrefSet = new Set(), selectedContentTypeSet = new Set(), selectedStorySet = new Set(), selectedInteractSet = new Set(), selectedBudgetSet = new Set(), selectedInstallSet = new Set(), selectedTimeSet = new Set();
     
     // DOM 元素
     const projectDescInput = document.getElementById('projectDescInput');
@@ -721,7 +730,7 @@
     const lockRatioCheck = document.getElementById('lockRatio');
     let currentPrompts = [];
     
-    // 通用渲染函数
+    // 通用渲染函数（无风格标签）
     function renderMultiSelect(containerId, options, selectedSet, onChange) {
         const container = document.getElementById(containerId);
         if(!container) return;
@@ -860,7 +869,7 @@
         const parts = [];
         if(selectedSeriesSet.size) parts.push(`风格系列:${Array.from(selectedSeriesSet).join('/')}`);
         if(selectedSubStyleSet.size) parts.push(`具体风格:${Array.from(selectedSubStyleSet).join('/')}`);
-        if(selectedStyleTagSet.size) parts.push(`风格标签:${Array.from(selectedStyleTagSet).join('/')}`);
+        // 风格标签已移除
         if(selectedVenueSet.size) parts.push(`场地:${Array.from(selectedVenueSet).join('/')}`);
         if(selectedFestivalsSet.size) parts.push(`节日主题:${Array.from(selectedFestivalsSet).join('/')}`);
         if(selectedElementsSet.size) parts.push(`核心元素:${Array.from(selectedElementsSet).join('·')}`);
@@ -888,7 +897,7 @@
         let html=''; prompts.forEach((p,i)=>{ html+=`<div class="prompt-item"><div class="prompt-number">🏮 第${i+1}组 · 灵境帧</div><div class="prompt-text">${p}</div><button class="copy-btn" data-index="${i}">📋 复制</button></div>`; });
         promptsListDiv.innerHTML=html; countDisplay.innerText=`${prompts.length}/20`;
         setupCopyButtons();
-        const selectedCount = { 风格:selectedSeriesSet.size, 具体风格:selectedSubStyleSet.size, 标签:selectedStyleTagSet.size, 场地:selectedVenueSet.size, 节日:selectedFestivalsSet.size, 元素:selectedElementsSet.size, 色彩:selectedColorSet.size, 材质:selectedMaterialSet.size, 灯光:selectedLightSet.size+selectedLightEffectSet.size, 结构:selectedStructureSet.size, 互动:selectedInteractionPrefSet.size, 内容:selectedContentTypeSet.size, 故事:selectedStorySet.size, 玩法:selectedInteractSet.size, 预算:selectedBudgetSet.size, 安装:selectedInstallSet.size, 时间:selectedTimeSet.size };
+        const selectedCount = { 风格:selectedSeriesSet.size, 具体风格:selectedSubStyleSet.size, 场地:selectedVenueSet.size, 节日:selectedFestivalsSet.size, 元素:selectedElementsSet.size, 色彩:selectedColorSet.size, 材质:selectedMaterialSet.size, 灯光:selectedLightSet.size+selectedLightEffectSet.size, 结构:selectedStructureSet.size, 互动:selectedInteractionPrefSet.size, 内容:selectedContentTypeSet.size, 故事:selectedStorySet.size, 玩法:selectedInteractSet.size, 预算:selectedBudgetSet.size, 安装:selectedInstallSet.size, 时间:selectedTimeSet.size };
         extraContent.innerHTML = `📊 已选维度：${Object.entries(selectedCount).filter(([k,v])=>v>0).map(([k,v])=>`${k}(${v})`).join(' · ') || '基础框架'}<br>📝 项目描述：${projectDescInput.value}<br>📐 尺度：${widthInput.value}×${heightInput.value}米`;
         extraOutput.style.display='block';
     }
@@ -901,7 +910,6 @@
         renderFestivalTree();
         renderMultiSelect('seriesBtns', seriesOptions, selectedSeriesSet, () => { renderSubStyleMulti(); });
         renderSubStyleMulti();
-        renderMultiSelect('styleTagBtns', styleTagList, selectedStyleTagSet);
         renderMultiSelect('venueBtns', venueFullList, selectedVenueSet);
         renderColorMultiSelect();
         renderMultiSelect('materialBtns', materialFullList, selectedMaterialSet);
